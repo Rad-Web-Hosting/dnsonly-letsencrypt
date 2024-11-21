@@ -52,5 +52,5 @@ EOF
 # Set permissions
 chmod 0700 /usr/local/bin/whmcert.py
 
-# Add cron to run script for SSL renewal 
-(crontab -l ; echo "0 0 * * 1 /usr/bin/certbot renew --quiet --post-hook '/usr/local/bin/whmcert.py $HOST'")| crontab -
+# Add cron to run script for SSL renewal
+crontab -l > cronfile.txt; echo "0 0 * * 1 /usr/bin/certbot renew --quiet --post-hook '/usr/local/bin/whmcert.py $HOST'" >> cronfile.txt; crontab cronfile.txt; rm cronfile.txt
